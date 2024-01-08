@@ -23,8 +23,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,23 +34,48 @@
             android:id="@+id/slider_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/slider_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:src="@drawable/slider_back"/>
 
         <ImageView
             android:id="@+id/slider_track"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_margin="7dp"
             android:paddingBottom="10dp"
-            android:src="@drawable/slider_track"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:src="@drawable/slider_track"/>
+
+        <ImageView
+            android:id="@+id/positionOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="77dp"
+            android:tag="69"
+            android:layout_marginStart="70dp"
+            android:src="@drawable/pos_one"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/positionTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:tag="130"
+            android:layout_marginEnd="39dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/pos_two"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/positionThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="169"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="88dp"
+            android:layout_marginEnd="9dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/pos_three"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/pointer"
@@ -59,31 +84,27 @@
             android:layout_alignBottom="@+id/slider_back"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:layout_marginTop="83dp"
-            android:src="@drawable/pointer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_marginTop="104dp"
+            android:src="@drawable/pointer"/>
 
 
         <ImageView
             android:id="@+id/play_btn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignBottom="@+id/slider_back"
             android:src="@drawable/play_btn"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="53dp"/>
+            android:layout_marginBottom="57dp"/>
 
         <ImageView
             android:id="@+id/pauseBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignBottom="@+id/slider_back"
             android:src="@drawable/pause_btn"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="69dp"/>
+            android:layout_marginBottom="81dp"/>
 
 
     </RelativeLayout>
