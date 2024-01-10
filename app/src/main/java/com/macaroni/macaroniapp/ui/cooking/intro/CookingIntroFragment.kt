@@ -74,7 +74,7 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
         binding?.startChoosenBtn?.setOnClickListener {
             cookingData ?: return@setOnClickListener
             val cookingFragment = CookingFragment()
-            cookingFragment.cookingData = cookingData
+            cookingFragment.cookingData = (cookingData)
             activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.drawer_layout, cookingFragment, "CookingFragment::class.java")
                 ?.commit()

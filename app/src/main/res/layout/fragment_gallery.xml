@@ -78,7 +78,7 @@
                 android:layout_marginTop="77dp"
                 android:src="@drawable/pos_one"
                 android:tag="69"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/positionTwo"
