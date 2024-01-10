@@ -185,10 +185,421 @@ class CookingFragment : Fragment() {
     }
 
     fun setLevelsData() {
+        levelCount = cookingData?.levelTaps ?: 0
         if (cookingData?.levelTaps == 3) {
             viewLevelPositionStack = arrayListOf(binding?.positionOne, binding?.positionTwo, binding?.positionThree)
             levelAngleList =  arrayListOf(Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"), Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"), Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"))
-            levelCount = 3
+        }
+        if (cookingData?.levelTaps == 4) {
+            viewLevelPositionStack = arrayListOf(binding?.positionEight, binding?.positionFour, binding?.positionSix, binding?.positionFive)
+            levelAngleList =  arrayListOf(Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"), Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"), Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"), Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"))
+        }
+        if (cookingData?.levelTaps == 5) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionFive,
+                binding?.positionOne,
+                binding?.positionSeven
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 6) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionTwo,
+                binding?.positionSix,
+                binding?.positionSeven,
+                binding?.positionThree
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 7) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionFive,
+                binding?.positionTwo,
+                binding?.positionFour
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 8) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionOne,
+                binding?.positionFive,
+                binding?.positionSeven,
+                binding?.positionFour,
+                binding?.positionTwo,
+                binding?.positionEight
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1")
+                )
+        }
+        if (cookingData?.levelTaps == 9) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionFive,
+                binding?.positionSix,
+                binding?.positionTwo,
+                binding?.positionSeven,
+                binding?.positionOne,
+                binding?.positionFour,
+                binding?.positionEight,
+                binding?.positionThree,
+                binding?.positionOne
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1")
+                )
+        }
+        if (cookingData?.levelTaps == 10) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionTwo,
+                binding?.positionSix,
+                binding?.positionEight,
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionFive,
+                binding?.positionOne,
+                binding?.positionSeven
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1")
+                )
+        }
+        if (cookingData?.levelTaps == 11) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionFive,
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionTwo,
+                binding?.positionSix,
+                binding?.positionSeven,
+                binding?.positionThree
+            )
+            levelAngleList = arrayListOf(
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1")
+            )
+
+        }
+        if (cookingData?.levelTaps == 12) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionFive,
+                binding?.positionTwo,
+                binding?.positionFour,
+                binding?.positionFour,
+                binding?.positionTwo,
+                binding?.positionEight
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 13) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionTwo,
+                binding?.positionSix,
+                binding?.positionEight,
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionFive,
+                binding?.positionOne,
+                binding?.positionSeven
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 14) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionFive,
+                binding?.positionTwo,
+                binding?.positionFour,
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionFive,
+                binding?.positionTwo,
+                binding?.positionFour
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 15) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionFive,
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionOne,
+                binding?.positionFive,
+                binding?.positionSeven,
+                binding?.positionFour,
+                binding?.positionTwo,
+                binding?.positionEight,
+                binding?.positionThree,
+                binding?.positionSix
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 16) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionOne,
+                binding?.positionFive,
+                binding?.positionSeven,
+                binding?.positionFour,
+                binding?.positionTwo,
+                binding?.positionEight,
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionOne,
+                binding?.positionFive,
+                binding?.positionSeven,
+                binding?.positionFour,
+                binding?.positionTwo,
+                binding?.positionEight
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1")
+            )
+        }
+        if (cookingData?.levelTaps == 17) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionTwo,
+                binding?.positionSix,
+                binding?.positionEight,
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionFive,
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionTwo,
+                binding?.positionSix,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionSix
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1")
+                )
+        }
+        if (cookingData?.levelTaps == 18) {
+            viewLevelPositionStack = arrayListOf(
+                binding?.positionThree,
+                binding?.positionEight,
+                binding?.positionFive,
+                binding?.positionOne,
+                binding?.positionSeven,
+                binding?.positionThree,
+                binding?.positionSix,
+                binding?.positionOne,
+                binding?.positionFive,
+                binding?.positionSeven,
+                binding?.positionFour,
+                binding?.positionTwo,
+                binding?.positionEight,
+                binding?.positionOne,
+                binding?.positionFour,
+                binding?.positionEight,
+                binding?.positionThree,
+                binding?.positionOne
+            )
+            levelAngleList =  arrayListOf(
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSix?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFive?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionSeven?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionFour?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionEight?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"),
+                Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1")
+            )
         }
     }
 
