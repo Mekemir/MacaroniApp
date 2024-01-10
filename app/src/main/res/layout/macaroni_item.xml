@@ -1,0 +1,29 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.macaroni.macaroniapp.bindings.ViewBindings.LayoutManagers" />
+
+        <variable
+            name="data"
+            type="com.macaroni.macaroniapp.adapter.MacaroniItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/macaroniItem"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="5dp"
+        android:onClick="@{()-> data.callback.onCookingItemClicked(data.itemData.levelTaps, data.itemData.drawable)}"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@{data.itemData.drawable}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

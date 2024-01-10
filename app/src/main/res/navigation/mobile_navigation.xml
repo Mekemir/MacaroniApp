@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.macaroni.macaroniapp.ui.gallery.GalleryFragment"
+        android:name="com.macaroni.macaroniapp.ui.cooking.CookingFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.macaroni.macaroniapp.ui.slideshow.SlideshowFragment"
+        android:name="com.macaroni.macaroniapp.ui.recipes.RecipesFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

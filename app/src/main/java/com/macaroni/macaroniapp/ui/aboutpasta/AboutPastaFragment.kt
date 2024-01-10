@@ -1,4 +1,4 @@
-package com.macaroni.macaroniapp.ui.slideshow
+package com.macaroni.macaroniapp.ui.aboutpasta
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.macaroni.macaroniapp.databinding.AboutPastaFragmentBinding
 import com.macaroni.macaroniapp.databinding.FragmentSlideshowBinding
+import com.macaroni.macaroniapp.ui.recipes.RecipesViewModel
 
-class SlideshowFragment : Fragment() {
-
-    private var _binding: FragmentSlideshowBinding? = null
+class AboutPastaFragment: Fragment() {
+    private var _binding: AboutPastaFragmentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,15 +24,10 @@ class SlideshowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val slideshowViewModel =
-            ViewModelProvider(this).get(SlideshowViewModel::class.java)
+            ViewModelProvider(this).get(AboutPastaViewModel::class.java)
 
-        _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
+        _binding = AboutPastaFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 

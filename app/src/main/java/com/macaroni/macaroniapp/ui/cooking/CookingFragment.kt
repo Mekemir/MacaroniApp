@@ -1,8 +1,6 @@
-package com.macaroni.macaroniapp.ui.gallery
+package com.macaroni.macaroniapp.ui.cooking
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +8,18 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
-import android.view.animation.LinearInterpolator
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.macaroni.macaroniapp.CookingItemData
 import com.macaroni.macaroniapp.R
 import com.macaroni.macaroniapp.databinding.FragmentGalleryBinding
 import java.util.Timer
 import java.util.TimerTask
 
 
-class GalleryFragment : Fragment() {
+class CookingFragment : Fragment() {
 
     private var _binding: FragmentGalleryBinding? = null
 
@@ -31,6 +30,7 @@ class GalleryFragment : Fragment() {
     val timerForPosition = Timer()
     var angle = 0.0
     var shouldStop = false
+    var cookingData: CookingItemData? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,15 +38,11 @@ class GalleryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+            ViewModelProvider(this).get(CookingViewModel::class.java)
 
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         binding.pauseBtn.setOnClickListener {
             shouldStop = true
             //working
@@ -71,8 +67,40 @@ class GalleryFragment : Fragment() {
             //working
             binding.pointer.clearAnimation()
         }
+        setPastaChooser()
         return root
 
+    }
+
+    private fun setPastaChooser() {
+        val pastaOne = binding.pastaOne
+        val pastaTwo = binding.pastaTwo
+        val pastaThree = binding.pastaThree
+        pastaOne.setImageDrawable(cookingData?.listOfPastas?.get(0))
+        pastaTwo.setImageDrawable(cookingData?.listOfPastas?.get(1))
+        pastaThree.setImageDrawable(cookingData?.listOfPastas?.get(2))
+
+        pastaOne.setOnClickListener {
+            val isCorrectText = if (pastaOne.tag == (cookingData?.incorrectPasta?.toLowerCase() ?: "")) { "no" } else { "yes" }
+            val toast = Toast.makeText(this.context, isCorrectText, Toast.LENGTH_SHORT)
+            toast.show()
+            binding.choosePastaHolder.visibility = View.GONE
+            binding.cookingHolder.visibility = View.VISIBLE
+        }
+        pastaTwo.setOnClickListener {
+            val isCorrectText = if (pastaTwo.tag == (cookingData?.incorrectPasta?.toLowerCase() ?: "")) { "no" } else { "yes" }
+            val toast = Toast.makeText(this.context, isCorrectText, Toast.LENGTH_SHORT)
+            toast.show()
+            binding.choosePastaHolder.visibility = View.GONE
+            binding.cookingHolder.visibility = View.VISIBLE
+        }
+        pastaThree.setOnClickListener {
+            val isCorrectText = if (pastaThree.tag == (cookingData?.incorrectPasta?.toLowerCase() ?: "")) { "no" } else { "yes" }
+            val toast = Toast.makeText(this.context, isCorrectText, Toast.LENGTH_SHORT)
+            toast.show()
+            binding.choosePastaHolder.visibility = View.GONE
+            binding.cookingHolder.visibility = View.VISIBLE
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
