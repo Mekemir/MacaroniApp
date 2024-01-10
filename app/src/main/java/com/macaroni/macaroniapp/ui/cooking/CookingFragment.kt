@@ -26,8 +26,8 @@ class CookingFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    val timer = Timer()
-    val timerForPosition = Timer()
+    var timer: Timer? = Timer()
+    var timerForPosition: Timer? = Timer()
     var angle = 0.0
     var shouldStop = false
     var cookingData: CookingItemData? = null
@@ -45,15 +45,15 @@ class CookingFragment : Fragment() {
 
         binding.pauseBtn.setOnClickListener {
             shouldStop = true
+            angle = angle/2
             //working
-            if (angle < 40 && angle > 15) {
+            if (angle <= 60 && angle > 15) {
                 binding.pointer.rotation = (angle - 20).toFloat()
                 Log.d("Current", angle.toString())
-            } else if (angle < 70 && angle > 40) {
+            } else if (angle < 80 && angle > 60) {
                 binding.pointer.rotation = (angle - 10).toFloat()
                 Log.d("Current", angle.toString())
-            }
-            else if (angle > 185.0) {
+            }  else if (angle > 185.0) {
                 val currentAngle = 180 - (angle - 185)
                 binding.pointer.rotation = (currentAngle).toFloat()
                 Log.d("Current", angle.toString())
@@ -86,6 +86,7 @@ class CookingFragment : Fragment() {
             toast.show()
             binding.choosePastaHolder.visibility = View.GONE
             binding.cookingHolder.visibility = View.VISIBLE
+            executePointerMove()
         }
         pastaTwo.setOnClickListener {
             val isCorrectText = if (pastaTwo.tag == (cookingData?.incorrectPasta?.toLowerCase() ?: "")) { "no" } else { "yes" }
@@ -105,7 +106,7 @@ class CookingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        executePointerMove()
+        //executePointerMove()
     }
 
     private fun slidePointerAnimation() {
@@ -119,7 +120,10 @@ class CookingFragment : Fragment() {
 
                 override fun onAnimationEnd(p0: Animation?) {
                     if (!shouldStop) {
-                        binding.pointer.animation = animationBack
+                        // binding.pointer.animation = animationBack
+                        binding.pointer.rotation = 0f
+                        timerForPosition?.cancel()
+                        timerForPosition = null
                     }
                 }
 
@@ -130,27 +134,21 @@ class CookingFragment : Fragment() {
             })
 
         binding.pointer.animation = animation
-
-
-//        val anim: ObjectAnimator = ObjectAnimator.ofFloat<View>(binding.pointer, View.ROTATION, 0f, 180f)
-//            .setDuration(2000)
-//        anim.interpolator = LinearInterpolator()
-//        anim.addListener()
-//        anim.start()
     }
 
     private fun executePointerMove() {
 
-        timer.scheduleAtFixedRate(object: TimerTask() {
-            override fun run() {
-                if (!shouldStop) {
-                    //angle = 0.0
-                    slidePointerAnimation()
-                }
-            }
-
-        }, 0 , 3600)
-        timerForPosition.scheduleAtFixedRate(object: TimerTask() {
+//        timer?.scheduleAtFixedRate(object: TimerTask() {
+//            override fun run() {
+//                if (!shouldStop) {
+//                    //angle = 0.0
+//                    slidePointerAnimation()
+//                }
+//            }
+//
+//        }, 0 , 3600)
+        slidePointerAnimation()
+        timerForPosition?.scheduleAtFixedRate(object: TimerTask() {
             override fun run() {
                 if (!shouldStop) {
                     if (angle > 360.0) {
@@ -168,5 +166,9 @@ class CookingFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        timer?.cancel()
+        timer = null
+        timerForPosition?.cancel()
+        timerForPosition = null
     }
 }
