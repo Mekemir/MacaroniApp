@@ -17,8 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.macaroni.macaroniapp.CookingItemData
 import com.macaroni.macaroniapp.R
 import com.macaroni.macaroniapp.databinding.FragmentGalleryBinding
-import java.util.Timer
-import java.util.TimerTask
 
 
 class CookingFragment : Fragment() {
@@ -30,8 +28,13 @@ class CookingFragment : Fragment() {
     var shouldStop = false
     var cookingData: CookingItemData? = null
     var viewLevelPositionStack: ArrayList<ImageView?>? = null
+    var levelAngleList: ArrayList<Int> = arrayListOf()
     var levelCount = 0
     var currentLevel = 0
+    var numberOfCorrectAnswers = 0
+    var startTime: Long = 0
+    var endTime: Long = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +50,8 @@ class CookingFragment : Fragment() {
 
         binding?.pauseBtn?.setOnClickListener {
             shouldStop = true
-            val newAngle = angle/2
+            endTime = System.currentTimeMillis()
+            val newAngle = (endTime - startTime)/20
             //working
             if (newAngle <= 60 && newAngle > 15) {
                 binding?.pointer?.rotation = (newAngle - 20).toFloat()
@@ -68,6 +72,8 @@ class CookingFragment : Fragment() {
             }
             //working
             binding?.pointer?.clearAnimation()
+
+            checkIfAnswerIsValid()
             binding?.pauseBtn?.visibility = View.GONE
             val handler = Handler()
             handler.postDelayed(object : Runnable {
@@ -125,10 +131,12 @@ class CookingFragment : Fragment() {
         val animation = AnimationUtils.loadAnimation(activity, R.anim.rotation_anim)
         animation.setAnimationListener(object : AnimationListener {
                 override fun onAnimationStart(p0: Animation?) {
-                        angle = 0.0
+                    startTime = System.currentTimeMillis()
+                    angle = 0.0
                 }
 
                 override fun onAnimationEnd(p0: Animation?) {
+                    endTime = System.currentTimeMillis()
                     if (!shouldStop) {
                         // binding?.pointer?.animation = animationBack
                         binding?.pointer?.rotation = 0f
@@ -147,7 +155,16 @@ class CookingFragment : Fragment() {
 
     private fun executePointerMove() {
         activity ?: return
-        if (levelCount == 0) return
+        if (levelCount == 0) {
+            if (numberOfCorrectAnswers == levelAngleList.size) {
+                val toast = Toast.makeText(this.context, "wow", Toast.LENGTH_SHORT)
+                toast.show()
+            } else {
+                val toast = Toast.makeText(this.context, numberOfCorrectAnswers.toString(), Toast.LENGTH_SHORT)
+                toast.show()
+            }
+            return
+        }
         binding?.pointer?.rotation = 0f
         binding?.pauseBtn?.visibility = View.VISIBLE
 
@@ -159,19 +176,6 @@ class CookingFragment : Fragment() {
         levelCount--
 
         slidePointerAnimation()
-
-        object : CountDownTimer(3600, 10) {
-            override fun onTick(millisUntilFinished: Long) {
-                angle = (3600 - millisUntilFinished)/10.toDouble()
-                // logic to set the EditText could go here
-                activity ?: return
-                Log.d("angle", angle.toString())
-            }
-
-            override fun onFinish() {
-                angle = 0.0
-            }
-        }.start()
     }
 
 
@@ -183,7 +187,25 @@ class CookingFragment : Fragment() {
     fun setLevelsData() {
         if (cookingData?.levelTaps == 3) {
             viewLevelPositionStack = arrayListOf(binding?.positionOne, binding?.positionTwo, binding?.positionThree)
+            levelAngleList =  arrayListOf(Integer.valueOf(binding?.positionOne?.tag.toString() ?: "-1"), Integer.valueOf(binding?.positionTwo?.tag.toString() ?: "-1"), Integer.valueOf(binding?.positionThree?.tag.toString() ?: "-1"))
             levelCount = 3
+        }
+    }
+
+    private fun checkIfAnswerIsValid() {
+        val tappedAngle: Double = (binding?.pointer?.rotation?.toDouble() ?: 0.0)
+        val correct1 = (tappedAngle - 2).toInt()
+        val correct2 = (tappedAngle - 1).toInt()
+        val correct3 = tappedAngle.toInt()
+        val correct4 = (tappedAngle + 1).toInt()
+        val correct5 = (tappedAngle + 2).toInt()
+
+        if (levelAngleList.contains(correct1)
+            || levelAngleList.contains(correct2)
+            || levelAngleList.contains(correct3)
+            || levelAngleList.contains(correct4)
+            || levelAngleList.contains(correct5)) {
+            numberOfCorrectAnswers += 1
         }
     }
 }

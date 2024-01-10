@@ -104,6 +104,63 @@
                 android:visibility="gone" />
 
             <ImageView
+                android:id="@+id/positionFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="88dp"
+                android:layout_marginStart="-8dp"
+                android:src="@drawable/pos_four"
+                android:tag="15"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/positionFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="75dp"
+                android:layout_marginEnd="36dp"
+                android:src="@drawable/pos_five"
+                android:tag="133"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/positionSix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="130dp"
+                android:layout_marginStart="10dp"
+                android:rotation="3"
+                android:src="@drawable/pos_six"
+                android:tag="35"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/positionSeven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pos_seven"
+                android:layout_marginTop="59dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:tag="91"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/positionEight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pos_eight"
+                android:layout_marginTop="57dp"
+                android:layout_marginEnd="95dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:tag="99"
+                android:visibility="gone" />
+
+            <ImageView
                 android:id="@+id/pointer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
