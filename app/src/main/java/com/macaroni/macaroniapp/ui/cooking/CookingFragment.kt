@@ -12,11 +12,14 @@ import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import com.macaroni.macaroniapp.CookingItemData
 import com.macaroni.macaroniapp.R
 import com.macaroni.macaroniapp.databinding.FragmentGalleryBinding
+import com.macaroni.macaroniapp.preferences.PreferencesRepository
 
 
 class CookingFragment : Fragment() {
@@ -24,6 +27,7 @@ class CookingFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private var binding: FragmentGalleryBinding? = null
+    private lateinit var viewModel: CookingViewModel
     var angle = 0.0
     var shouldStop = false
     var cookingData: CookingItemData? = null
@@ -34,19 +38,32 @@ class CookingFragment : Fragment() {
     var numberOfCorrectAnswers = 0
     var startTime: Long = 0
     var endTime: Long = 0
+    var allTimeCorrectNumber: String = ""
+    var isCorrectText = false
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel =
+            ViewModelProvider(this).get(CookingViewModel::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val galleryViewModel =
-            ViewModelProvider(this).get(CookingViewModel::class.java)
-
-        binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gallery, container,  false)
+        binding?.lifecycleOwner = this.viewLifecycleOwner
+        this.activity?.applicationContext?.let {
+            viewModel.preferencesRepository = PreferencesRepository.getInstance(it)
+            viewModel.numberOfCorrectFlow = viewModel.preferencesRepository?.numberOfCorrectFlow
+        }
+        binding?.data = viewModel
         val root: View? = binding?.root
         setLevelsData()
+        binding?.homeBtn?.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         binding?.pauseBtn?.setOnClickListener {
             shouldStop = true
@@ -98,32 +115,35 @@ class CookingFragment : Fragment() {
         pastaThree.setImageDrawable(cookingData?.listOfPastas?.get(2))
 
         pastaOne.setOnClickListener {
-            val isCorrectText = if (pastaOne.tag == (cookingData?.incorrectPasta?.toLowerCase() ?: "")) { "no" } else { "yes" }
-            val toast = Toast.makeText(this.context, isCorrectText, Toast.LENGTH_SHORT)
+            isCorrectText = (pastaOne.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
+            val toast = Toast.makeText(this.context, isCorrectText.toString(), Toast.LENGTH_SHORT)
             toast.show()
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
         }
         pastaTwo.setOnClickListener {
-            val isCorrectText = if (pastaTwo.tag == (cookingData?.incorrectPasta?.toLowerCase() ?: "")) { "no" } else { "yes" }
-            val toast = Toast.makeText(this.context, isCorrectText, Toast.LENGTH_SHORT)
+            isCorrectText = (pastaTwo.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
+            val toast = Toast.makeText(this.context, isCorrectText.toString(), Toast.LENGTH_SHORT)
             toast.show()
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
+            executePointerMove()
+
         }
         pastaThree.setOnClickListener {
-            val isCorrectText = if (pastaThree.tag == (cookingData?.incorrectPasta?.toLowerCase() ?: "")) { "no" } else { "yes" }
-            val toast = Toast.makeText(this.context, isCorrectText, Toast.LENGTH_SHORT)
+            isCorrectText = (pastaThree.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
+            val toast = Toast.makeText(this.context, isCorrectText.toString(), Toast.LENGTH_SHORT)
             toast.show()
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
+            executePointerMove()
+
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //getLevelsData()
     }
 
     private fun slidePointerAnimation() {
@@ -156,9 +176,10 @@ class CookingFragment : Fragment() {
     private fun executePointerMove() {
         activity ?: return
         if (levelCount == 0) {
-            if (numberOfCorrectAnswers == levelAngleList.size) {
+            if (numberOfCorrectAnswers == levelAngleList.size && isCorrectText) {
                 val toast = Toast.makeText(this.context, "wow", Toast.LENGTH_SHORT)
                 toast.show()
+                viewModel.newCorrectAnswerAllTimeCount(cookingData?.levelTaps ?: 0)
             } else {
                 val toast = Toast.makeText(this.context, numberOfCorrectAnswers.toString(), Toast.LENGTH_SHORT)
                 toast.show()

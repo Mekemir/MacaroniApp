@@ -22,6 +22,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.drawer_layout, HomeFragment(), "HomeFragment::class.java")
+            .commitNow()
+    }
+
     override fun onBackPressed() {
         val popBackSize: Int = supportFragmentManager.fragments.size
         if (popBackSize == 1) {

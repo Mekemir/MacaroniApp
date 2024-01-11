@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import com.macaroni.macaroniapp.CookingItemData
 import com.macaroni.macaroniapp.R
 import com.macaroni.macaroniapp.callback.MacaroniCallback
-import com.macaroni.macaroniapp.databinding.CookingIntroFragmentBinding
 import com.macaroni.macaroniapp.databinding.FragmentSlideshowBinding
 import com.macaroni.macaroniapp.getRecipesData
-import com.macaroni.macaroniapp.ui.cooking.intro.CookingIntroViewModel
+import com.macaroni.macaroniapp.preferences.PreferencesRepository
 
 class RecipesFragment : Fragment(), MacaroniCallback {
 
@@ -23,11 +22,12 @@ class RecipesFragment : Fragment(), MacaroniCallback {
     private lateinit var viewModel: RecipesViewModel
     private var recipes: ArrayList<CookingItemData>? = null
     var cookingData: CookingItemData? = null
+    var allTimeCorrectNumber: Int = 0
+    var unlockedDishes: ArrayList<Int> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(RecipesViewModel::class.java)
-        recipes = getRecipesData(resources)
     }
 
     override fun onCreateView(
@@ -39,17 +39,32 @@ class RecipesFragment : Fragment(), MacaroniCallback {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_slideshow, container, false)
         binding?.lifecycleOwner = this.viewLifecycleOwner
+        this.activity?.applicationContext?.let {
+            viewModel.preferencesRepository = PreferencesRepository.getInstance(it)
+            viewModel.numberOfCorrectFlow = viewModel.preferencesRepository?.numberOfCorrectFlow
+        }
         binding?.data = viewModel
         viewModel.callback = this
+
+        binding?.homeBtn?.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.addPastaItems(getPastasIcons())
-        viewModel.addSoupItems(getSoupsIcons())
-        viewModel.addSaladItems(getSaladsIcons())
+
+        viewModel.numberOfCorrectFlow?.asLiveData()?.observe(binding?.lifecycleOwner ?: return) {
+            if (it != 0) {
+                allTimeCorrectNumber = it
+            }
+            recipes = getRecipesData(resources, allTimeCorrectNumber)
+            viewModel.addPastaItems(getPastasIcons())
+            viewModel.addSoupItems(getSoupsIcons())
+            viewModel.addSaladItems(getSaladsIcons())
+        }
     }
 
         override fun onDestroyView() {

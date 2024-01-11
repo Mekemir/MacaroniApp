@@ -7,5 +7,6 @@ data class CookingItemData(
     val drawable: Drawable,
     val name: String,
     val listOfPastas: ArrayList<Drawable> = arrayListOf(),
-    val incorrectPasta: String
+    val incorrectPasta: String,
+    val isLocked: Boolean
 )

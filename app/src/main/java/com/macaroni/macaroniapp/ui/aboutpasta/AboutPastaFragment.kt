@@ -28,6 +28,9 @@ class AboutPastaFragment: Fragment() {
 
         _binding = AboutPastaFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        _binding?.homeBtn?.setOnClickListener {
+            activity?.onBackPressed()
+        }
         return root
     }
 

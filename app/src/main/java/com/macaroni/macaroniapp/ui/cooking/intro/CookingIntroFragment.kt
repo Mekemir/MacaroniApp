@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import com.macaroni.macaroniapp.CookingItemData
 import com.macaroni.macaroniapp.R
 import com.macaroni.macaroniapp.callback.MacaroniCallback
 import com.macaroni.macaroniapp.databinding.CookingIntroFragmentBinding
 import com.macaroni.macaroniapp.getRecipesData
+import com.macaroni.macaroniapp.preferences.PreferencesRepository
 import com.macaroni.macaroniapp.ui.cooking.CookingFragment
 
 class CookingIntroFragment: Fragment(), MacaroniCallback {
@@ -25,11 +27,12 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
     private val categories = getCategories()
     private var recipes: ArrayList<CookingItemData>? = null
     var cookingData: CookingItemData? = null
+    var allTimeCorrectNumber: Int = 0
+    var unlockedDishes: ArrayList<Int> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CookingIntroViewModel::class.java)
-        recipes = getRecipesData(resources)
     }
 
     override fun onCreateView(
@@ -40,9 +43,16 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.cooking_intro_fragment, container,  false)
         binding?.lifecycleOwner = this.viewLifecycleOwner
+        this.activity?.applicationContext?.let {
+            viewModel.preferencesRepository = PreferencesRepository.getInstance(it)
+            viewModel.numberOfCorrectFlow = viewModel.preferencesRepository?.numberOfCorrectFlow
+        }
         viewModel.callback = this
         binding?.data  = viewModel
 
+        binding?.homeBtn?.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
 //        // val textView: TextView = binding.textSlideshow
 //        slideshowViewModel.text.observe(viewLifecycleOwner) {
@@ -88,7 +98,15 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.addItems(getPastasIcons())
+
+        viewModel.numberOfCorrectFlow?.asLiveData()?.observe(binding?.lifecycleOwner ?: return) {
+            if (it != 0) {
+                allTimeCorrectNumber = it
+            }
+            viewModel.adapter.clearItems()
+            recipes = getRecipesData(resources, allTimeCorrectNumber)
+            viewModel.addItems(getPastasIcons())
+        }
     }
 
     private fun handleRight(currentIndex: Int) {

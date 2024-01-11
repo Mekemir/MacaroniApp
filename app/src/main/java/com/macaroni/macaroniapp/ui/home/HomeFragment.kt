@@ -11,6 +11,7 @@ import com.macaroni.macaroniapp.R
 import com.macaroni.macaroniapp.databinding.FragmentHomeBinding
 import com.macaroni.macaroniapp.ui.aboutpasta.AboutPastaFragment
 import com.macaroni.macaroniapp.ui.cooking.intro.CookingIntroFragment
+import com.macaroni.macaroniapp.ui.mydishes.MyDishesFragment
 import com.macaroni.macaroniapp.ui.recipes.RecipesFragment
 
 class HomeFragment : Fragment() {
@@ -52,6 +53,12 @@ class HomeFragment : Fragment() {
         binding.recipes.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.drawer_layout, RecipesFragment(), "RecipesFragment::class.java")
+                ?.commit()
+        }
+
+        binding.myDishes.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.drawer_layout, MyDishesFragment(), "MyDishesFragment::class.java")
                 ?.commit()
         }
         return root

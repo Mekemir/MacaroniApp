@@ -23,7 +23,17 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@{data.itemData.drawable}" />
+            app:srcCompat="@{data.itemData.drawable}"
+            tools:src="@drawable/spagheti_carbonara"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            app:setVisibility="@{data.lockingVisibility}"
+            android:src="@drawable/lock_icon"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
