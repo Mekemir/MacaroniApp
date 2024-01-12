@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.macaroni.macaroniapp.bindings.ViewBindings.LayoutManagers" />
+        <import type="com.game.macaroniapp.bindings.ViewBindings.LayoutManagers" />
 
         <variable
             name="data"
-            type="com.macaroni.macaroniapp.ui.mydishes.MyDishesViewModel" />
+            type="com.game.macaroniapp.ui.mydishes.MyDishesViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
