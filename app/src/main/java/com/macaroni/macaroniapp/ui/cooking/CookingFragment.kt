@@ -1,5 +1,6 @@
 package com.macaroni.macaroniapp.ui.cooking
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -38,7 +39,7 @@ class CookingFragment : Fragment() {
     var numberOfCorrectAnswers = 0
     var startTime: Long = 0
     var endTime: Long = 0
-    var allTimeCorrectNumber: String = ""
+    var levelIndex: Int = -1
     var isCorrectText = false
 
 
@@ -68,20 +69,44 @@ class CookingFragment : Fragment() {
         binding?.pauseBtn?.setOnClickListener {
             shouldStop = true
             endTime = System.currentTimeMillis()
-            val newAngle = (endTime - startTime)/20
+            var newAngle = (endTime - startTime)/20
+            
             //working
-            if (newAngle <= 60 && newAngle > 15) {
+            if (newAngle >= 0 && newAngle <= 25) {
+                binding?.pointer?.rotation = (newAngle - 13).toFloat()
+                Log.d("Current", newAngle.toString())
+            } else if (newAngle <= 50 && newAngle > 25) {
                 binding?.pointer?.rotation = (newAngle - 20).toFloat()
                 Log.d("Current", newAngle.toString())
-            } else if (newAngle < 80 && newAngle > 60) {
+            } else if (newAngle <= 58 && newAngle > 50) {
+                binding?.pointer?.rotation = (newAngle - 17).toFloat()
+                Log.d("Current", newAngle.toString())
+            } else if (newAngle <= 60 && newAngle > 58) {
+                binding?.pointer?.rotation = (newAngle - 13).toFloat()
+                Log.d("Current", newAngle.toString())
+            } else if (newAngle < 73 && newAngle > 60) {
                 binding?.pointer?.rotation = (newAngle - 10).toFloat()
                 Log.d("Current", newAngle.toString())
-            }  else if (newAngle > 185.0) {
-                val currentAngle = 180 - (newAngle - 185)
-                binding?.pointer?.rotation = (currentAngle).toFloat()
+            } else if (newAngle < 80 && newAngle >= 73) {
+                binding?.pointer?.rotation = (newAngle - 6).toFloat()
                 Log.d("Current", newAngle.toString())
-            } else if (newAngle < 185.0 && newAngle > 105) {
+            } else if (newAngle < 97 && newAngle >= 92) {
+                binding?.pointer?.rotation = (newAngle + 2).toFloat()
+                Log.d("Current", newAngle.toString())
+            }  else if (newAngle < 108 && newAngle >= 97) {
+                binding?.pointer?.rotation = (newAngle + 6).toFloat()
+                Log.d("Current", newAngle.toString())
+            }  else if (newAngle < 115 && newAngle >= 108) {
                 binding?.pointer?.rotation = (newAngle + 10).toFloat()
+                Log.d("Current", newAngle.toString())
+            }  else if (newAngle < 140 && newAngle >= 115) {
+                binding?.pointer?.rotation = (newAngle + 15).toFloat()
+                Log.d("Current", newAngle.toString())
+            }   else if (newAngle < 150 && newAngle >= 140) {
+                binding?.pointer?.rotation = (newAngle + 20).toFloat()
+                Log.d("Current", newAngle.toString())
+            } else if (newAngle < 160 && newAngle >= 150) {
+                binding?.pointer?.rotation = (newAngle + 15).toFloat()
                 Log.d("Current", newAngle.toString())
             } else {
                 binding?.pointer?.rotation = (newAngle).toFloat()
@@ -117,7 +142,7 @@ class CookingFragment : Fragment() {
         pastaOne.setOnClickListener {
             isCorrectText = (pastaOne.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
             val toast = Toast.makeText(this.context, isCorrectText.toString(), Toast.LENGTH_SHORT)
-            toast.show()
+            // toast.show()
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
@@ -125,7 +150,7 @@ class CookingFragment : Fragment() {
         pastaTwo.setOnClickListener {
             isCorrectText = (pastaTwo.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
             val toast = Toast.makeText(this.context, isCorrectText.toString(), Toast.LENGTH_SHORT)
-            toast.show()
+            // toast.show()
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
@@ -134,7 +159,7 @@ class CookingFragment : Fragment() {
         pastaThree.setOnClickListener {
             isCorrectText = (pastaThree.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
             val toast = Toast.makeText(this.context, isCorrectText.toString(), Toast.LENGTH_SHORT)
-            toast.show()
+            // toast.show()
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
@@ -153,6 +178,7 @@ class CookingFragment : Fragment() {
                 override fun onAnimationStart(p0: Animation?) {
                     startTime = System.currentTimeMillis()
                     angle = 0.0
+                    levelIndex = levelIndex + 1
                 }
 
                 override fun onAnimationEnd(p0: Animation?) {
@@ -178,14 +204,15 @@ class CookingFragment : Fragment() {
         if (levelCount == 0) {
             if (numberOfCorrectAnswers == levelAngleList.size && isCorrectText) {
                 val toast = Toast.makeText(this.context, "wow", Toast.LENGTH_SHORT)
-                toast.show()
+                // toast.show()
                 viewModel.newCorrectAnswerAllTimeCount(cookingData?.levelTaps ?: 0)
             } else {
                 val toast = Toast.makeText(this.context, numberOfCorrectAnswers.toString(), Toast.LENGTH_SHORT)
-                toast.show()
+                // toast.show()
             }
             return
         }
+        binding?.potImage?.setImageDrawable(context?.getDrawable(R.drawable.pot_image))
         binding?.pointer?.rotation = 0f
         binding?.pauseBtn?.visibility = View.VISIBLE
 
@@ -624,20 +651,37 @@ class CookingFragment : Fragment() {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun checkIfAnswerIsValid() {
+        val currentCorrectAngle = levelAngleList.get(levelIndex)
         val tappedAngle: Double = (binding?.pointer?.rotation?.toDouble() ?: 0.0)
-        val correct1 = (tappedAngle - 2).toInt()
-        val correct2 = (tappedAngle - 1).toInt()
-        val correct3 = tappedAngle.toInt()
-        val correct4 = (tappedAngle + 1).toInt()
-        val correct5 = (tappedAngle + 2).toInt()
+        val correct0 = (currentCorrectAngle - 3).toInt()
+        val correct1 = (currentCorrectAngle - 2).toInt()
+        val correct2 = (currentCorrectAngle - 1).toInt()
+        val correct3 = currentCorrectAngle.toInt()
+        val correct4 = (currentCorrectAngle + 1).toInt()
+        val correct5 = (currentCorrectAngle + 2).toInt()
 
-        if (levelAngleList.contains(correct1)
-            || levelAngleList.contains(correct2)
-            || levelAngleList.contains(correct3)
-            || levelAngleList.contains(correct4)
-            || levelAngleList.contains(correct5)) {
+        val correctRange = correct0..correct5
+
+        if (correctRange.contains(tappedAngle.toInt())) {
             numberOfCorrectAnswers += 1
+            // delicious
+            binding?.potImage?.setImageDrawable(context?.getDrawable(R.drawable.delicious_imae))
+            return
         }
+        // check for good cooked
+
+        val goodRangeFirst = ((currentCorrectAngle-3)-14) until ((currentCorrectAngle-3))
+        val goodRangeSecond = ((currentCorrectAngle+2)+1) until ((currentCorrectAngle+2) + 14)
+        if (goodRangeFirst.contains(tappedAngle.toInt())
+            || goodRangeSecond.contains(tappedAngle.toInt())) {
+            // good range
+            binding?.potImage?.setImageDrawable(context?.getDrawable(R.drawable.good))
+        } else {
+            // bad range
+            binding?.potImage?.setImageDrawable(context?.getDrawable(R.drawable.notbad))
+        }
+
     }
 }

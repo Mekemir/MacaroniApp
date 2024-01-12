@@ -46,9 +46,11 @@
             android:id="@+id/pot_image"
             android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pot_image" />
+            android:layout_width="245dp"
+            android:layout_height="207dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/pot_image"
+            tools:src="@drawable/notbad"/>
 
         <RelativeLayout
             android:layout_width="300dp"
