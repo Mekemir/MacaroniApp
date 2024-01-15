@@ -20,27 +20,54 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/scroll_backg"
+        android:layout_marginTop="81dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="90dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        style="@style/scrollStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:layout_marginEnd="60dp"
-            android:paddingBottom="90dp"
-            android:textSize="22sp"
-            android:fontFamily="@font/moloko"
-            android:text="Pasta, any of several starchy food preparations (pasta alimentaria) frequently associated with Italian cuisine and made from semolina, the granular product obtained from the endosperm of a type of wheat called durum, and containing a large proportion of gluten. It is formed into ribbons, cords, tubes, and various special shapes, all originally developed for specific characteristics, such as ability to retain heat or hold sauces. In commercial processing, the semolina mixed with warm water is kneaded into a smooth stiff dough and extruded. The dough, moved forward while it is being compacted and mixed, is forced through perforated plates, or dies, that form it into the desired shape. Hollow tubular forms, such as macaroni, result when the perforations are small and contain steel pins, while smaller holes without pins produce spaghetti. Flat ribbonlike types are made by slitted perforations. Shell forms are produced by a special die; small fancy shapes are produced by rotary knives slicing the dough as it emerges from the die. The formed dough is next dried, reducing its moisture content from about 31 percent to approximately 12 percent. The drying is carefully regulated, as very rapid drying may result in cracking, and very slow drying may produce stretching or encourage the growth of mold or of organisms that produce souring. Pastas are prepared by boiling and may be cooked until firm and resilient to the bite (al dente) or until very tender. Prepared Italian style, they may be tossed with butter, cheese, and seasoning or served with a variety of sauces, or meat-based mixtures such as Bolognese sauce. Shaped pastas are often stuffed with meat, cheese, spinach or other ingredients. Pastas are also cooked in soups and are used in casseroles and other dishes that call for the use of noodles, a similar starch preparation. Uncooked pastas retain their freshness from three to six months" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="8"
+                android:textColor="@color/white"
+                android:layout_marginEnd="60dp"
+                android:paddingBottom="50dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="22sp"
+                android:fontFamily="@font/moloko"
+                android:text="Pasta, any of several starchy food preparations (pasta alimentaria) frequently associated with Italian cuisine and made from semolina, the granular product obtained from the endosperm of a type of wheat called durum, and containing a large proportion of gluten. It is formed into ribbons, cords, tubes, and various special shapes, all originally developed for specific characteristics, such as ability to retain heat or hold sauces. In commercial processing, the semolina mixed with warm water is kneaded into a smooth stiff dough and extruded. The dough, moved forward while it is being compacted and mixed, is forced through perforated plates, or dies, that form it into the desired shape. Hollow tubular forms, such as macaroni, result when the perforations are small and contain steel pins, while smaller holes without pins produce spaghetti. Flat ribbonlike types are made by slitted perforations. Shell forms are produced by a special die; small fancy shapes are produced by rotary knives slicing the dough as it emerges from the die. The formed dough is next dried, reducing its moisture content from about 31 percent to approximately 12 percent. The drying is carefully regulated, as very rapid drying may result in cracking, and very slow drying may produce stretching or encourage the growth of mold or of organisms that produce souring. Pastas are prepared by boiling and may be cooked until firm and resilient to the bite (al dente) or until very tender. Prepared Italian style, they may be tossed with butter, cheese, and seasoning or served with a variety of sauces, or meat-based mixtures such as Bolognese sauce. Shaped pastas are often stuffed with meat, cheese, spinach or other ingredients. Pastas are also cooked in soups and are used in casseroles and other dishes that call for the use of noodles, a similar starch preparation. Uncooked pastas retain their freshness from three to six months" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/owsleaf"
+                android:paddingBottom="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

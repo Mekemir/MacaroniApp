@@ -15,22 +15,22 @@ class PreferencesRepository private constructor(context: Context) {
         context.applicationContext.getSharedPreferences(USER_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
     private val _numberOfCorrectFlow = MutableStateFlow(correctNumber)
-    val numberOfCorrectFlow: StateFlow<Int> = _numberOfCorrectFlow
+    val numberOfCorrectFlow: StateFlow<String> = _numberOfCorrectFlow
 
-    private val correctNumber: Int
+    private val correctNumber: String
         get() {
-            return sharedPreferences.getInt(CORRECT_ANSWERS, 0) ?: 0
+            return sharedPreferences.getString(CORRECT_ANSWERS, "0?") ?: "0?"
         }
 
-    fun newCorrectAnswerAllTimeCount(allTimeCorrectNumber: Int) {
+    fun newCorrectAnswerAllTimeCount(allTimeCorrectNumber: String) {
 
         updateSortOrder(allTimeCorrectNumber)
         _numberOfCorrectFlow.value = allTimeCorrectNumber
     }
 
-    private fun updateSortOrder(numberOfCorrect: Int) {
+    private fun updateSortOrder(numberOfCorrect: String) {
         sharedPreferences.edit {
-            putInt(CORRECT_ANSWERS, numberOfCorrect)
+            putString(CORRECT_ANSWERS, numberOfCorrect)
         }
     }
 

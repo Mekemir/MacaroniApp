@@ -1,6 +1,7 @@
 package com.game.macaroniapp.ui.cooking
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -15,9 +16,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import com.game.macaroniapp.CookingItemData
+import com.game.macaroniapp.MainActivity
+import com.game.macaroniapp.Player
 import com.game.macaroniapp.R
 import com.game.macaroniapp.databinding.FragmentGalleryBinding
+import com.game.macaroniapp.getRecipesData
 import com.game.macaroniapp.preferences.PreferencesRepository
 
 
@@ -39,7 +44,8 @@ class CookingFragment : Fragment() {
     var endTime: Long = 0
     var levelIndex: Int = -1
     var isCorrectText = false
-
+    var allTimeCorrectNumber: String = "0?"
+    var player: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,6 +150,7 @@ class CookingFragment : Fragment() {
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
+            playSong()
         }
         pastaTwo.setOnClickListener {
             isCorrectText = (pastaTwo.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
@@ -152,7 +159,7 @@ class CookingFragment : Fragment() {
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
-
+            playSong()
         }
         pastaThree.setOnClickListener {
             isCorrectText = (pastaThree.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
@@ -161,12 +168,17 @@ class CookingFragment : Fragment() {
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
-
+            playSong()
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.numberOfCorrectFlow?.asLiveData()?.observe(binding?.lifecycleOwner ?: return) {
+            if (it != "0?") {
+                allTimeCorrectNumber = allTimeCorrectNumber + it
+            }
+        }
     }
 
     private fun slidePointerAnimation() {
@@ -203,7 +215,7 @@ class CookingFragment : Fragment() {
             if (numberOfCorrectAnswers == levelAngleList.size && isCorrectText) {
                 val toast = Toast.makeText(this.context, "wow", Toast.LENGTH_SHORT)
                 // toast.show()
-                viewModel.newCorrectAnswerAllTimeCount(cookingData?.levelTaps ?: 0)
+                viewModel.newCorrectAnswerAllTimeCount(allTimeCorrectNumber + (cookingData?.levelTaps ?: 0).toString() + "?")
             } else {
                 val toast = Toast.makeText(this.context, numberOfCorrectAnswers.toString(), Toast.LENGTH_SHORT)
                 // toast.show()
@@ -681,5 +693,19 @@ class CookingFragment : Fragment() {
             binding?.potImage?.setImageDrawable(context?.getDrawable(R.drawable.notbad))
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        player?.stop()
+    }
+
+    private fun playSong() {
+        val activityIfValid = activity ?: return
+        val index = (activityIfValid as MainActivity).musicIndex
+        if (index == 0) {
+            return
+        }
+        player = Player().play(index, this.context)
     }
 }

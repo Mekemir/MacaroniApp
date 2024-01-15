@@ -1,4 +1,6 @@
 package com.game.macaroniapp.ui.music
 
-class MusicViewModel {
+import androidx.lifecycle.ViewModel
+
+class MusicViewModel: ViewModel() {
 }

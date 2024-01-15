@@ -17,7 +17,7 @@ class RecipesViewModel : ViewModel() {
     val soupsAdapter = MacaroniAdapter()
     val saladsAdapter = MacaroniAdapter()
     var preferencesRepository: PreferencesRepository? = null
-    var numberOfCorrectFlow: StateFlow<Int>? = null
+    var numberOfCorrectFlow: StateFlow<String>? = null
 
     var callback: MacaroniCallback? = null
 
@@ -26,27 +26,42 @@ class RecipesViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    fun addPastaItems(listOfIcons: List<CookingItemData> ) {
+    fun addPastaItems(listOfIcons: List<CookingItemData>, unlocked: ArrayList<Int>) {
         val call = callback ?: return
         listOfIcons.forEachIndexed { index, it ->
-            pastaAdapter.addItem(index, MacaroniItem(it, call, if (it.isLocked) {
-                View.VISIBLE} else { View.GONE}))
+            val isPreviousUnlocked = unlocked.contains(it.levelTaps - 1)
+            val locked = if (!isPreviousUnlocked && (it.isLocked && it.levelTaps != 3 && it.levelTaps != 14 && it.levelTaps != 16)) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            pastaAdapter.addItem(index, MacaroniItem(it, call, locked))
         }
     }
 
-    fun addSoupItems(listOfIcons: List<CookingItemData> ) {
+    fun addSoupItems(listOfIcons: List<CookingItemData>, unlocked: ArrayList<Int>) {
         val call = callback ?: return
         listOfIcons.forEachIndexed { index, it ->
-            soupsAdapter.addItem(index, MacaroniItem(it, call, if (it.isLocked) {
-                View.VISIBLE} else { View.GONE}))
+            val isPreviousUnlocked = unlocked.contains(it.levelTaps - 1)
+            val locked = if (!isPreviousUnlocked && (it.isLocked && it.levelTaps != 3 && it.levelTaps != 14 && it.levelTaps != 16)) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            soupsAdapter.addItem(index, MacaroniItem(it, call, locked))
         }
     }
 
-    fun addSaladItems(listOfIcons: List<CookingItemData> ) {
+    fun addSaladItems(listOfIcons: List<CookingItemData>, unlocked: ArrayList<Int>) {
         val call = callback ?: return
         listOfIcons.forEachIndexed { index, it ->
-            saladsAdapter.addItem(index, MacaroniItem(it, call, if (it.isLocked) {
-                View.VISIBLE} else { View.GONE}))
+            val isPreviousUnlocked = unlocked.contains(it.levelTaps - 1)
+            val locked = if (!isPreviousUnlocked && (it.isLocked && it.levelTaps != 3 && it.levelTaps != 14 && it.levelTaps != 16)) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            saladsAdapter.addItem(index, MacaroniItem(it, call, locked))
         }
     }
 }

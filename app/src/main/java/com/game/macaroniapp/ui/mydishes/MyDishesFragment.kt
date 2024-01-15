@@ -13,6 +13,7 @@ import com.game.macaroniapp.R
 import com.game.macaroniapp.callback.MacaroniCallback
 import com.game.macaroniapp.databinding.MyDishesFragmentBinding
 import com.game.macaroniapp.getRecipesData
+import com.game.macaroniapp.getUnlockedLevels
 import com.game.macaroniapp.preferences.PreferencesRepository
 
 class MyDishesFragment : Fragment(), MacaroniCallback {
@@ -21,7 +22,7 @@ class MyDishesFragment : Fragment(), MacaroniCallback {
     private lateinit var viewModel: MyDishesViewModel
     private var recipes: ArrayList<CookingItemData>? = null
     var cookingData: CookingItemData? = null
-    var allTimeCorrectNumber: Int = 0
+    var allTimeCorrectNumber: String = "0?"
     var unlockedDishes: ArrayList<Int> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,10 +55,10 @@ class MyDishesFragment : Fragment(), MacaroniCallback {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.numberOfCorrectFlow?.asLiveData()?.observe(binding?.lifecycleOwner ?: return) {
-            if (it != 0) {
-                allTimeCorrectNumber = it
+            if (it != "0?") {
+                allTimeCorrectNumber =  allTimeCorrectNumber + it.toString()
             }
-            recipes = getRecipesData(resources, allTimeCorrectNumber)
+            recipes = getRecipesData(resources, getUnlockedLevels(allTimeCorrectNumber))
             viewModel.addDishesItems(recipes?.filter { !it.isLocked })
         }
     }

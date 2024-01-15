@@ -14,7 +14,7 @@ class MyDishesViewModel : ViewModel() {
 
     val pastaAdapter = MacaroniAdapter()
     var preferencesRepository: PreferencesRepository? = null
-    var numberOfCorrectFlow: StateFlow<Int>? = null
+    var numberOfCorrectFlow: StateFlow<String>? = null
 
     var callback: MacaroniCallback? = null
 
@@ -26,11 +26,8 @@ class MyDishesViewModel : ViewModel() {
     fun addDishesItems(listOfIcons: List<CookingItemData>? ) {
         val call = callback ?: return
         val listOfDishes = listOfIcons?.filter { !it.isLocked }
-        if (listOfDishes?.size == 1) return
         listOfDishes?.forEachIndexed { index, it ->
-            if (index != (listOfDishes.size - 1)) {
-                pastaAdapter.addItem(index, MyDishesItem(it, call))
-            }
+            pastaAdapter.addItem(index, MyDishesItem(it, call))
         }
     }
 }

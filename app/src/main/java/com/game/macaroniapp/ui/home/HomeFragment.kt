@@ -10,6 +10,7 @@ import com.game.macaroniapp.R
 import com.game.macaroniapp.databinding.FragmentHomeBinding
 import com.game.macaroniapp.ui.aboutpasta.AboutPastaFragment
 import com.game.macaroniapp.ui.cooking.intro.CookingIntroFragment
+import com.game.macaroniapp.ui.music.MusicFragment
 import com.game.macaroniapp.ui.mydishes.MyDishesFragment
 import com.game.macaroniapp.ui.recipes.RecipesFragment
 
@@ -58,6 +59,11 @@ class HomeFragment : Fragment() {
         binding.myDishes.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.drawer_layout, MyDishesFragment(), "MyDishesFragment::class.java")
+                ?.commit()
+        }
+        binding.music.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.drawer_layout, MusicFragment(), "MusicFragment::class.java")
                 ?.commit()
         }
         return root

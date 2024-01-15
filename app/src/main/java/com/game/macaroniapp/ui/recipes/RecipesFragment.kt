@@ -14,6 +14,7 @@ import com.game.macaroniapp.R
 import com.game.macaroniapp.callback.MacaroniCallback
 import com.game.macaroniapp.databinding.FragmentSlideshowBinding
 import com.game.macaroniapp.getRecipesData
+import com.game.macaroniapp.getUnlockedLevels
 import com.game.macaroniapp.preferences.PreferencesRepository
 
 class RecipesFragment : Fragment(), MacaroniCallback {
@@ -22,7 +23,7 @@ class RecipesFragment : Fragment(), MacaroniCallback {
     private lateinit var viewModel: RecipesViewModel
     private var recipes: ArrayList<CookingItemData>? = null
     var cookingData: CookingItemData? = null
-    var allTimeCorrectNumber: Int = 0
+    var allTimeCorrectNumber: String = "0?"
     var unlockedDishes: ArrayList<Int> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,13 +58,14 @@ class RecipesFragment : Fragment(), MacaroniCallback {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.numberOfCorrectFlow?.asLiveData()?.observe(binding?.lifecycleOwner ?: return) {
-            if (it != 0) {
+            if (it != "0?") {
                 allTimeCorrectNumber = it
             }
-            recipes = getRecipesData(resources, allTimeCorrectNumber)
-            viewModel.addPastaItems(getPastasIcons())
-            viewModel.addSoupItems(getSoupsIcons())
-            viewModel.addSaladItems(getSaladsIcons())
+            val getLocked = getUnlockedLevels(allTimeCorrectNumber)
+            recipes = getRecipesData(resources, getLocked)
+            viewModel.addPastaItems(getPastasIcons(), getLocked)
+            viewModel.addSoupItems(getSoupsIcons(), getLocked)
+            viewModel.addSaladItems(getSaladsIcons(), getLocked)
         }
     }
 

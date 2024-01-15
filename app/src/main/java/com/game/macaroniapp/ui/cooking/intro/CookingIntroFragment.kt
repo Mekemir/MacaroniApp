@@ -15,6 +15,7 @@ import com.game.macaroniapp.R
 import com.game.macaroniapp.callback.MacaroniCallback
 import com.game.macaroniapp.databinding.CookingIntroFragmentBinding
 import com.game.macaroniapp.getRecipesData
+import com.game.macaroniapp.getUnlockedLevels
 import com.game.macaroniapp.preferences.PreferencesRepository
 import com.game.macaroniapp.ui.cooking.CookingFragment
 
@@ -27,7 +28,7 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
     private val categories = getCategories()
     private var recipes: ArrayList<CookingItemData>? = null
     var cookingData: CookingItemData? = null
-    var allTimeCorrectNumber: Int = 0
+    var allTimeCorrectNumber: String = "0?"
     var unlockedDishes: ArrayList<Int> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,12 +101,13 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.numberOfCorrectFlow?.asLiveData()?.observe(binding?.lifecycleOwner ?: return) {
-            if (it != 0) {
-                allTimeCorrectNumber = it
+            if (it != "0?") {
+                allTimeCorrectNumber = allTimeCorrectNumber + it
             }
             viewModel.adapter.clearItems()
-            recipes = getRecipesData(resources, allTimeCorrectNumber)
-            viewModel.addItems(getPastasIcons())
+            val getUnlocked = getUnlockedLevels(allTimeCorrectNumber)
+            recipes = getRecipesData(resources, getUnlocked)
+            viewModel.addItems(getPastasIcons(), getUnlocked)
         }
     }
 
@@ -113,10 +115,10 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
         viewModel.adapter.clearItems()
         binding?.category?.text = categories.get(currentIndex + 1)
         if ((currentIndex + 1) == 1) {
-            viewModel.addItems(getSoupsIcons())
+            viewModel.addItems(getSoupsIcons(), getUnlockedLevels(allTimeCorrectNumber))
         }
         if ((currentIndex + 1) == 2) {
-            viewModel.addItems(getSaladsIcons())
+            viewModel.addItems(getSaladsIcons(), getUnlockedLevels(allTimeCorrectNumber))
         }
     }
 
@@ -124,10 +126,10 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
         viewModel.adapter.clearItems()
         binding?.category?.text = categories.get(currentIndex - 1)
         if ((currentIndex - 1) == 1) {
-            viewModel.addItems(getSoupsIcons())
+            viewModel.addItems(getSoupsIcons(), getUnlockedLevels(allTimeCorrectNumber))
         }
         if ((currentIndex - 1) == 0) {
-            viewModel.addItems(getPastasIcons())
+            viewModel.addItems(getPastasIcons(), getUnlockedLevels(allTimeCorrectNumber))
         }
     }
 

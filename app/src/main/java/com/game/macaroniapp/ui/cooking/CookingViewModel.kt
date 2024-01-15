@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.StateFlow
 class CookingViewModel : ViewModel() {
 
     var preferencesRepository: PreferencesRepository? = null
-    var numberOfCorrectFlow: StateFlow<Int>? = null
+    var numberOfCorrectFlow: StateFlow<String>? = null
 
-    fun newCorrectAnswerAllTimeCount(allTimeCorrectNumber: Int) {
+    fun newCorrectAnswerAllTimeCount(allTimeCorrectNumber: String) {
         preferencesRepository?.newCorrectAnswerAllTimeCount(allTimeCorrectNumber)
     }
 }
