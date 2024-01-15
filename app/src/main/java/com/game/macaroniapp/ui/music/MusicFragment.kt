@@ -15,6 +15,7 @@ import com.game.macaroniapp.MainActivity
 import com.game.macaroniapp.Player
 import com.game.macaroniapp.R
 import com.game.macaroniapp.databinding.MusicFragmentBinding
+import com.game.macaroniapp.preferences.PreferencesRepository
 
 class MusicFragment: Fragment() {
     private var binding: MusicFragmentBinding? = null
@@ -37,6 +38,10 @@ class MusicFragment: Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.music_fragment, container, false)
         binding?.lifecycleOwner = this.viewLifecycleOwner
+        this.activity?.applicationContext?.let {
+            viewModel.preferencesRepository = PreferencesRepository.getInstance(it)
+            viewModel.musicIndex = viewModel.preferencesRepository?.numberOfAllAnswersFlow
+        }
 
         binding?.data = viewModel
 
@@ -45,11 +50,13 @@ class MusicFragment: Fragment() {
             (activity as? MainActivity)?.musicIndex = 1
             (activity as? MainActivity)?.playSong()
             binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.songicon))
+            viewModel.newSongChoosen(1)
             isTurnedOff = false
         }
         binding?.songTwo?.setOnClickListener {
             (activity as? MainActivity)?.stopSong()
             (activity as? MainActivity)?.musicIndex = 2
+            viewModel.newSongChoosen(2)
             (activity as? MainActivity)?.playSong()
             binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.songicon))
             isTurnedOff = false
@@ -57,6 +64,7 @@ class MusicFragment: Fragment() {
         binding?.songThree?.setOnClickListener {
             (activity as? MainActivity)?.stopSong()
             (activity as? MainActivity)?.musicIndex = 3
+            viewModel.newSongChoosen(3)
             (activity as? MainActivity)?.playSong()
             binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.songicon))
             isTurnedOff = false
@@ -71,6 +79,7 @@ class MusicFragment: Fragment() {
             if (!isTurnedOff) {
                 binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.turnedoff))
                 (activity as MainActivity).musicIndex = 0
+                viewModel.newSongChoosen(0)
                 (activity as? MainActivity)?.stopSong()
                 isTurnedOff = !isTurnedOff
             }
@@ -86,6 +95,7 @@ class MusicFragment: Fragment() {
         super.onPause()
         if (isTurnedOff) {
             (activity as MainActivity).musicIndex = 0
+            viewModel.newSongChoosen(0)
             (activity as MainActivity).stopSong()
         }
     }

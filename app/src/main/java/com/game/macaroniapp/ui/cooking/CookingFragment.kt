@@ -217,6 +217,7 @@ class CookingFragment : Fragment() {
                 val toast = Toast.makeText(this.context, numberOfCorrectAnswers.toString(), Toast.LENGTH_SHORT)
                 // toast.show()
             }
+            activity?.onBackPressed()
             return
         }
         binding?.potImage?.setImageDrawable(context?.getDrawable(R.drawable.pot_image))

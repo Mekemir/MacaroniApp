@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import com.game.macaroniapp.MainActivity
 import com.game.macaroniapp.R
 import com.game.macaroniapp.databinding.FragmentHomeBinding
+import com.game.macaroniapp.preferences.PreferencesRepository
 import com.game.macaroniapp.ui.aboutpasta.AboutPastaFragment
 import com.game.macaroniapp.ui.cooking.intro.CookingIntroFragment
 import com.game.macaroniapp.ui.music.MusicFragment
@@ -35,6 +38,10 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding?.lifecycleOwner = this.viewLifecycleOwner
+        this.activity?.applicationContext?.let {
+            viewModel.preferencesRepository = PreferencesRepository.getInstance(it)
+            viewModel.musicIndex = viewModel.preferencesRepository?.numberOfAllAnswersFlow
+        }
 
         binding?.data = viewModel
 
@@ -69,6 +76,18 @@ class HomeFragment : Fragment() {
                 ?.commit()
         }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.musicIndex?.asLiveData()?.observe(binding?.lifecycleOwner ?: return) {
+            if (it != 0) {
+                (activity as? MainActivity)?.musicIndex = it
+                // (activity as? MainActivity)?.playSong()
+            } else {
+                (activity as? MainActivity)?.stopSong()
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -89,6 +89,7 @@ class CookingIntroFragment: Fragment(), MacaroniCallback {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.drawer_layout, cookingFragment, "CookingFragment::class.java")
                 ?.commit()
+            binding?.choosenItemLayout?.visibility = View.GONE
         }
         binding?.choosenItemLayout?.setOnClickListener {
             binding?.choosenItemLayout?.visibility = View.GONE

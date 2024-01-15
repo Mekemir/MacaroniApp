@@ -19,18 +19,6 @@
     android:focusable="true"
     tools:context=".ui.cooking.CookingFragment">
 
-
-    <ImageView
-        android:id="@+id/homeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:paddingTop="25dp"
-        android:src="@drawable/back_home_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <LinearLayout
         android:id="@+id/cookingHolder"
         android:layout_width="match_parent"
@@ -219,10 +207,9 @@
             android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="65dp"
+            android:layout_marginStart="75dp"
             android:layout_marginTop="25dp"
-            android:background="@drawable/choose_recipe_header" />
+            android:background="@drawable/choose_pasta" />
 
         <ImageView
             android:id="@+id/pastaBackground"
@@ -292,5 +279,16 @@
             android:src="@drawable/line"
             android:tag="three" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/homeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:paddingTop="25dp"
+        android:src="@drawable/back_home_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
