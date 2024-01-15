@@ -150,7 +150,6 @@ class CookingFragment : Fragment() {
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
-            playSong()
         }
         pastaTwo.setOnClickListener {
             isCorrectText = (pastaTwo.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
@@ -159,7 +158,6 @@ class CookingFragment : Fragment() {
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
-            playSong()
         }
         pastaThree.setOnClickListener {
             isCorrectText = (pastaThree.tag != (cookingData?.incorrectPasta?.toLowerCase() ?: ""))
@@ -168,7 +166,6 @@ class CookingFragment : Fragment() {
             binding?.choosePastaHolder?.visibility = View.GONE
             binding?.cookingHolder?.visibility = View.VISIBLE
             executePointerMove()
-            playSong()
         }
     }
 
@@ -698,14 +695,5 @@ class CookingFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         player?.stop()
-    }
-
-    private fun playSong() {
-        val activityIfValid = activity ?: return
-        val index = (activityIfValid as MainActivity).musicIndex
-        if (index == 0) {
-            return
-        }
-        player = Player().play(index, this.context)
     }
 }

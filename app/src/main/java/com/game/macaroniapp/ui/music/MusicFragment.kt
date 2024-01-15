@@ -19,7 +19,6 @@ import com.game.macaroniapp.databinding.MusicFragmentBinding
 class MusicFragment: Fragment() {
     private var binding: MusicFragmentBinding? = null
     private lateinit var viewModel: MusicViewModel
-    var player: MediaPlayer? = null
     var isTurnedOff = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,19 +41,25 @@ class MusicFragment: Fragment() {
         binding?.data = viewModel
 
         binding?.songOne?.setOnClickListener {
-            player?.stop()
+            (activity as? MainActivity)?.stopSong()
             (activity as? MainActivity)?.musicIndex = 1
-            playSong()
+            (activity as? MainActivity)?.playSong()
+            binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.songicon))
+            isTurnedOff = false
         }
         binding?.songTwo?.setOnClickListener {
-            player?.stop()
+            (activity as? MainActivity)?.stopSong()
             (activity as? MainActivity)?.musicIndex = 2
-            playSong()
+            (activity as? MainActivity)?.playSong()
+            binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.songicon))
+            isTurnedOff = false
         }
         binding?.songThree?.setOnClickListener {
-            player?.stop()
+            (activity as? MainActivity)?.stopSong()
             (activity as? MainActivity)?.musicIndex = 3
-            playSong()
+            (activity as? MainActivity)?.playSong()
+            binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.songicon))
+            isTurnedOff = false
         }
         if (isTurnedOff) {
             binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.turnedoff))
@@ -63,16 +68,12 @@ class MusicFragment: Fragment() {
         }
 
         binding?.turnOn?.setOnClickListener {
-            if (isTurnedOff) {
-                if ((activity as MainActivity).musicIndex == 0) {
-                    (activity as MainActivity).musicIndex = 1
-                }
-                binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.songicon))
-            } else {
+            if (!isTurnedOff) {
                 binding?.turnOn?.setImageDrawable(this.context?.getDrawable(R.drawable.turnedoff))
                 (activity as MainActivity).musicIndex = 0
+                (activity as? MainActivity)?.stopSong()
+                isTurnedOff = !isTurnedOff
             }
-            isTurnedOff = !isTurnedOff
         }
         binding?.homeBtn?.setOnClickListener {
             activity?.onBackPressed()
@@ -83,15 +84,9 @@ class MusicFragment: Fragment() {
 
     override fun onPause() {
         super.onPause()
-        player?.stop()
         if (isTurnedOff) {
             (activity as MainActivity).musicIndex = 0
+            (activity as MainActivity).stopSong()
         }
-    }
-
-    private fun playSong() {
-        val activityIfValid = activity ?: return
-        val index = (activityIfValid as MainActivity).musicIndex
-        player = Player().play(index, this.context)
     }
 }
