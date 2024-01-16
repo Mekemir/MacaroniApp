@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,32 +16,39 @@
         android:src="@drawable/back_home_btn"
         android:paddingTop="21dp"
         android:layout_marginStart="15dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         />
 
     <ImageView
+        android:id="@+id/scrollBackgroundPos"
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:background="@drawable/scroll_backg"
         android:layout_marginTop="81dp"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
 
+        <ImageView
+            android:id="@+id/macaroniView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/macaroniscroll"
+            android:layout_alignParentEnd="true"/>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrolling"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        style="@style/scrollStyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        android:layout_toLeftOf="@+id/macaroniView"
+        android:visibility="visible" >
 
         <RelativeLayout
+            android:id="@+id/scrolHolder"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
@@ -52,7 +59,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="8"
                 android:textColor="@color/white"
-                android:layout_marginEnd="60dp"
+                android:layout_marginEnd="40dp"
                 android:paddingBottom="50dp"
                 android:layout_marginBottom="20dp"
                 android:textSize="22sp"
@@ -70,4 +77,4 @@
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

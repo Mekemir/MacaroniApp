@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.drawer_layout, HomeFragment(), "HomeFragment::class.java")
-            .commitNow()
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.drawer_layout, HomeFragment(), "HomeFragment::class.java")
+//            .commitNow()
         playSong()
     }
 
