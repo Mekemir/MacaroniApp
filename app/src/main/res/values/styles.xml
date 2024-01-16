@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="scrollStyle">
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="fastScrollEnabled">true</item>
+        <item name="android:scrollbarThumbVertical">@drawable/macaroniscroll</item>
+        <item name="fastScrollHorizontalThumbDrawable">@drawable/thumb_drawable</item>
+        <item name="fastScrollHorizontalTrackDrawable">@drawable/line_drawable</item>
+        <item name="fastScrollVerticalThumbDrawable">@drawable/thumb_drawable</item>
+        <item name="fastScrollVerticalTrackDrawable">@drawable/line_drawable</item>
+    </style>
+</resources>

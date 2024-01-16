@@ -8,7 +8,7 @@
         android:pivotY="50%"
         android:toDegrees="180"
         android:fromDegrees="0"
-        android:duration="1800"
+        android:duration="3600"
         android:startOffset="0"
         />
 
