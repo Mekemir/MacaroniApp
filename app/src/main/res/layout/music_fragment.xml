@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="com.game.macaroniapp.bindings.ViewBindings.LayoutManagers" />
+        <import type="com.macaronsensationni.macaroniapp.bindings.ViewBindings.LayoutManagers" />
 
         <variable
             name="data"
-            type="com.game.macaroniapp.ui.music.MusicViewModel" />
+            type="com.macaronsensationni.macaroniapp.ui.music.MusicViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

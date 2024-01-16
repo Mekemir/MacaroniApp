@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.game.macaroniapp'
+    namespace 'com.macaronsensationni.macaroniapp'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.game.macaroniapp"
+        applicationId "com.macaronsensationni.macaroniapp"
         minSdk 21
         targetSdk 33
         versionCode 1

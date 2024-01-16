@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.game.macaroniapp.ui.home.HomeFragment"
+        android:name="com.macaronsensationni.macaroniapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.game.macaroniapp.ui.cooking.CookingFragment"
+        android:name="com.macaronsensationni.macaroniapp.ui.cooking.CookingFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.game.macaroniapp.ui.recipes.RecipesFragment"
+        android:name="com.macaronsensationni.macaroniapp.ui.recipes.RecipesFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>
