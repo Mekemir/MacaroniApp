@@ -1,4 +1,4 @@
-package com.macaronsensationni.macaroniapp.adapter
+package com.macaronsensationni.adapter
 
 import androidx.databinding.ViewDataBinding
 import com.macaronsensationni.macaroniapp.BaseDataBoundAdapter

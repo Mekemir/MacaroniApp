@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.macaronsensationni.macaroniapp.CookingItemData
-import com.macaronsensationni.macaroniapp.adapter.MacaroniAdapter
-import com.macaronsensationni.macaroniapp.adapter.MyDishesItem
+import com.macaronsensationni.adapter.MacaroniAdapter
+import com.macaronsensationni.adapter.MyDishesItem
 import com.macaronsensationni.macaroniapp.callback.MacaroniCallback
 import com.macaronsensationni.macaroniapp.preferences.PreferencesRepository
 import kotlinx.coroutines.flow.StateFlow

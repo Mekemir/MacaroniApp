@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.macaronsensationni.macaroniapp.adapter.MyDishesItem" />
+            type="com.macaronsensationni.adapter.MyDishesItem" />
     </data>
 
 <LinearLayout

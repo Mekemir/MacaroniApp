@@ -1,13 +1,11 @@
-package com.macaronsensationni.macaroniapp.adapter
+package com.macaronsensationni.adapter
 
 import androidx.databinding.BaseObservable
 import com.macaronsensationni.macaroniapp.CookingItemData
 import com.macaronsensationni.macaroniapp.callback.MacaroniCallback
 
-class MacaroniItem(
+class MyDishesItem(
     val itemData: CookingItemData,
-    val callback: MacaroniCallback,
-    val lockingVisibility: Int
+    val callback: MacaroniCallback
 ): BaseObservable() {
-
 }
