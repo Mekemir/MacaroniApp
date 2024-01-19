@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="com.macaronsensationni.macaroniapp.bindings.ViewBindings.LayoutManagers" />
+        <import type="com.macaronisensation.bindings.ViewBindings.LayoutManagers" />
 
         <variable
             name="data"
-            type="com.macaronsensationni.macaroniapp.ui.cooking.CookingViewModel" />
+            type="com.macaronisensation.ui.cooking.CookingViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
     android:background="@drawable/background"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".ui.cooking.CookingFragment">
+    tools:context="com.macaronisensation.ui.cooking.CookingFragment">
 
     <LinearLayout
         android:id="@+id/cookingHolder"

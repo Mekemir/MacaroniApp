@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@drawable/little_about_back"
-    tools:context=".ui.aboutpasta.AboutPastaFragment">
+    tools:context="com.macaronisensation.ui.aboutpasta.AboutPastaFragment">
 
     <ImageView
         android:id="@+id/homeBtn"

@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.macaronsensationni.macaroniapp.bindings.ViewBindings.LayoutManagers" />
+        <import type="com.macaronisensation.bindings.ViewBindings.LayoutManagers" />
 
         <variable
             name="data"
-            type="com.macaronsensationni.macaroniapp.adapter.MyDishesItem" />
+            type="com.macaronisensation.adapter.MyDishesItem" />
     </data>
 
 <LinearLayout

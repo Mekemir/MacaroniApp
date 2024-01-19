@@ -4,17 +4,17 @@
 
     <data>
 
-        <import type="com.macaronsensationni.macaroniapp.bindings.ViewBindings.LayoutManagers" />
+        <import type="com.macaronisensation.bindings.ViewBindings.LayoutManagers" />
 
         <variable
             name="data"
-            type="com.macaronsensationni.macaroniapp.ui.home.HomeViewModel" />
+            type="com.macaronisensation.ui.home.HomeViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/menu"
-    tools:context=".ui.home.HomeFragment">
+    tools:context="com.macaronisensation.ui.home.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
