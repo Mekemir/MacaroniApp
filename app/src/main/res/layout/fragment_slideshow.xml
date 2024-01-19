@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="com.macaronsensationni.macaroniapp.bindings.ViewBindings.LayoutManagers" />
+        <import type="com.macaronisensation.bindings.ViewBindings.LayoutManagers" />
 
         <variable
             name="data"
-            type="com.macaronsensationni.macaroniapp.ui.recipes.RecipesViewModel" />
+            type="com.macaronisensation.ui.recipes.RecipesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

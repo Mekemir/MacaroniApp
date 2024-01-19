@@ -15,11 +15,11 @@ android {
             keyPassword 'macaroni'
         }
     }
-    namespace 'com.macaronsensationni.macaroniapp'
+    namespace 'com.macaronisensation'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.macaronsensationni.macaroniapp"
+        applicationId "com.macaronisensation"
         minSdk 21
         targetSdk 33
         versionCode 1
